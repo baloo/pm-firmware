@@ -1,0 +1,9 @@
+[build]
+target = "thumbv7em-none-eabi"
+
+[target.'cfg(all(target_arch = "arm", target_os = "none"))']
+rustflags = [
+  "-C", "link-arg=-Tlink.x",
+]
+
+runner = "gdb-multiarch -x openocd.gdb"

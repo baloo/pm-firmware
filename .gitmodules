@@ -1,0 +1,12 @@
+[submodule "crates/core-futures-tls"]
+	path = crates/core-futures-tls
+	url = git@github.com:baloo/core-futures-tls.git
+	branch = baloo/embedded
+[submodule "crates/stm32f4xx-hal"]
+	path = crates/stm32f4xx-hal
+	url = git@github.com:baloo/stm32f4xx-hal.git
+	branch = baloo/async-await
+[submodule "crates/embedded-hal"]
+	path = crates/embedded-hal
+	url = https://github.com/no111u3/embedded-hal.git
+	branch = switch_async_to_futures
