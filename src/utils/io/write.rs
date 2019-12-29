@@ -128,9 +128,16 @@ where
 
     fn poll_flush(
         mut self: Pin<&mut Self>,
-        _cx: &mut task::Context<'_>,
+        cx: &mut task::Context<'_>,
     ) -> Poll<Result<(), Self::Error>> {
-        unsafe { self.get_unchecked_mut() }.flush()
+        let writer = unsafe { self.get_unchecked_mut() };
+        match writer.flush() {
+            Poll::Pending => {
+                writer.listen(cx.waker().clone());
+                Poll::Pending
+            }
+            Poll::Ready(out) => Poll::Ready(out),
+        }
     }
 
     fn poll_close(
